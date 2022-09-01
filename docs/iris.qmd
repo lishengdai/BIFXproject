@@ -2,7 +2,10 @@
 title: "Learning R on iris"
 author: "Based on the Rpubs tutorial found at https://rpubs.com/moeransm/intro-iris"
 date: "9/1/2022"
-format: html
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
 theme:
   light: flatly
   dark: darkly

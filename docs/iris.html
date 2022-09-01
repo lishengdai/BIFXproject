@@ -146,12 +146,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="load-the-iris-dataset" class="level1">
 <h1><strong>Load the iris dataset</strong></h1>
 <div class="cell">
+<details>
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The datasets package needs to be loaded to access our data </span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># For a full list of these datasets, type </span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="at">help =</span> <span class="st">"datasets"</span>) </span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(datasets) </span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(iris) </span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
@@ -191,8 +194,11 @@ Tip
 <section id="filter" class="level3">
 <h3 class="anchored" data-anchor-id="filter"><strong>filter()</strong></h3>
 <div class="cell">
+<details>
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(iris) <span class="ot">&lt;-</span> <span class="fu">tolower</span>(<span class="fu">names</span>(iris))</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'dplyr'</code></pre>
@@ -207,9 +213,12 @@ Attaching package: 'dplyr'</code></pre>
 
     intersect, setdiff, setequal, union</code></pre>
 </div>
+<details>
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filter() the data for species virginica</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>virginica <span class="ot">&lt;-</span> <span class="fu">filter</span>(iris, species <span class="sc">==</span> <span class="st">"virginica"</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(virginica) <span class="co"># This dispalys the first six rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  sepal.length sepal.width petal.length petal.width   species
 1          6.3         3.3          6.0         2.5 virginica
@@ -222,8 +231,11 @@ Attaching package: 'dplyr'</code></pre>
 </div>
 <p>Notice that we use the <code>logical</code> double equal sign as in <code>species == "virginica"</code>, and quotations around <code>virginica</code> since this value is of a <code>char</code> (character) data type. The equivalent <code>base</code> command for <code>filter()</code> would be <code>subset()</code>, with all the inner arguments being exactly the same. We can also filter for multiple conditions within our function.</p>
 <div class="cell">
+<details>
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sepalLength6 <span class="ot">&lt;-</span> <span class="fu">filter</span>(iris, species <span class="sc">==</span> <span class="st">"virginica"</span>, sepal.length <span class="sc">&gt;</span> <span class="dv">6</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(sepalLength6) <span class="co"># compare this to head()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>   sepal.length sepal.width petal.length petal.width   species
 36          6.8         3.2          5.9         2.3 virginica
@@ -240,19 +252,25 @@ Attaching package: 'dplyr'</code></pre>
 <h3 class="anchored" data-anchor-id="select"><strong>select()</strong></h3>
 <p>This function selects data by column name. You can select any number of columns in a few different ways.</p>
 <div class="cell">
+<details>
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select() the specified columns</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>selected <span class="ot">&lt;-</span> <span class="fu">select</span>(iris, sepal.length, sepal.width, petal.length)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># select all columns from sepal.length to petal.length</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>selected2 <span class="ot">&lt;-</span> <span class="fu">select</span>(iris, sepal.length<span class="sc">:</span>petal.length)</span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(selected, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  sepal.length sepal.width petal.length
 1          5.1         3.5          1.4
 2          4.9         3.0          1.4
 3          4.7         3.2          1.3</code></pre>
 </div>
+<details>
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># selected and selected2 are exactly the same</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(selected, selected2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
@@ -260,9 +278,12 @@ Attaching package: 'dplyr'</code></pre>
 <p><strong>mutate()</strong></p>
 <p>Create new columns using this function</p>
 <div class="cell">
+<details>
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a new column that stores logical values for sepal.width greater than half of sepal.length</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>newCol <span class="ot">&lt;-</span> <span class="fu">mutate</span>(iris, <span class="at">greater.half =</span> sepal.width <span class="sc">&gt;</span> <span class="fl">0.5</span> <span class="sc">*</span> sepal.length)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(newCol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>    sepal.length sepal.width petal.length petal.width   species greater.half
 145          6.7         3.3          5.7         2.5 virginica        FALSE
@@ -276,9 +297,12 @@ Attaching package: 'dplyr'</code></pre>
 <p>Challenge: Out of the 150 flowers, find how many satisfy this condition. Hint: use the <code>sum()</code> function on <code>newCol$greater.half</code></p>
 <p><strong>Other functions</strong></p>
 <div class="cell">
+<details>
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># arrange()</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>newCol <span class="ot">&lt;-</span> <span class="fu">arrange</span>(newCol, petal.width)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(newCol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  sepal.length sepal.width petal.length petal.width species greater.half
 1          4.9         3.1          1.5         0.1  setosa         TRUE
@@ -288,11 +312,14 @@ Attaching package: 'dplyr'</code></pre>
 5          4.9         3.6          1.4         0.1  setosa         TRUE
 6          5.1         3.5          1.4         0.2  setosa         TRUE</code></pre>
 </div>
+<details>
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The chain operator, or the pipeline %&gt;%</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This will first filter, and then arrange our data. Note that here the order in which you call functions does not matter, but in other cases it might</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>arr.virg <span class="ot">&lt;-</span> newCol <span class="sc">%&gt;%</span> <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">"virginica"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(sepal.width)</span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>arr.virg[<span class="dv">30</span><span class="sc">:</span><span class="dv">35</span>,] <span class="co"># will show us rows 30 through 35 and all columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>   sepal.length sepal.width petal.length petal.width   species greater.half
 30          6.8         3.0          5.5         2.1 virginica        FALSE
@@ -302,10 +329,13 @@ Attaching package: 'dplyr'</code></pre>
 34          6.4         3.1          5.5         1.8 virginica        FALSE
 35          6.9         3.1          5.4         2.1 virginica        FALSE</code></pre>
 </div>
+<details>
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You can also arrange in descending order using desc() on what you arrange by</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># arrange(desc(sepal.width))</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># summarise()</span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(arr.virg, <span class="at">mean.length =</span> <span class="fu">mean</span>(sepal.length, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  mean.length
 1       6.588</code></pre>
@@ -317,20 +347,29 @@ Attaching package: 'dplyr'</code></pre>
 <h3 class="anchored" data-anchor-id="visualization"><strong>Visualization</strong></h3>
 <p>Any powerful analysis will visualize the data to give a better picture (<em>wink wink</em>) of the data. Below is a general plot of the iris dataset:</p>
 <div class="cell">
+<details>
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <p><img src="iris_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>If we’re looking to plot specific variables, we can use <code>plot(x,y)</code> where <code>x</code> and <code>y</code> are the variables we’re interested in. <code>hist()</code> is another useful function</p>
 <div class="cell">
+<details>
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use ?plot to read more about other arguments</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris<span class="sc">$</span>sepal.width, iris<span class="sc">$</span>sepal.length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <p><img src="iris_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
+<details>
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ?hist will give you details on more arguments</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(iris<span class="sc">$</span>sepal.width)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <p><img src="iris_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid" width="672"></p>
 </div>
