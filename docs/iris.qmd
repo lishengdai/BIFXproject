@@ -3,7 +3,7 @@ title: "Learning R on iris"
 author: "Based on the Rpubs tutorial found at https://rpubs.com/moeransm/intro-iris"
 date: "9/1/2022"
 format:
-  html:
+  docx:
     code-fold: true
     code-summary: "Show the code"
 theme:
@@ -28,6 +28,11 @@ library(datasets)
 data(iris) 
 summary(iris)
 ```
+
+|
+|
+|
+
 
 ::: callout-tip
 The `summary()` function gives summary statistics for any dataset. It can also be called on one variable instead of on the whole dataset. Try `summary(iris$Sepal.Length)` and compare that with the above summaries.
