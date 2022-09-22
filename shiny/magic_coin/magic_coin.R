@@ -15,8 +15,6 @@ magic_coin <- function(seeds, input = list())
     
     for (i in 1:length(seeds)){
       set.seed(seeds[i])
-  # for (i in seeds){
-  #    set.seed(i)
       test <- rbinom(ncheck, 1, 0.5)
       nheads[i] <- which(test == 0)[1] -1
     
