@@ -5,7 +5,7 @@ format:
     theme: 
       light: flatly
       dark: darkly
-bibliography: references.bib
+#bibliography: references.bib
 editor: visual
 ---
 
@@ -97,6 +97,8 @@ if(!file.exists('sisver.RData'))
         ### individuals were hospitalized
         ### event time is between 0 and 30 days
 ########################################################################
+    filter(da_admit >='2021-1-1' & da_admit<='2021-4-5'&
+             hospitalized & event_time >0 & event_time < 30) %>%
     
     select(dt_symptoms, dt_admit, dt_death, covid_death, event_date,
            event_time, death_intubation, t_sympt_death, dog, dog_all, 
@@ -107,7 +109,7 @@ if(!file.exists('sisver.RData'))
 }else{
     load('sisver.RData')
 }
-
+load('sisver.RData')
 ```
 
 Let's start by looking at the primary effects of different risk factors and confounders on mortality.
@@ -162,13 +164,16 @@ make_km_plot <- function(fact)
         
         # plot survival curve
         autoplot(conf.int = FALSE) +
-        
+        labs(color = fact) + 
+        scale_color_manual (values = cbbPalette[2:3])
+    
+}      
 ########################################################################
         # modifications to plot: 
         ### use `cbbPalette` loaded above for colors
         ### change legend title to match `fact`
 ########################################################################
-}
+
 
 make_km_plot('antivirals')
 make_km_plot(  'diabetes')
@@ -196,7 +201,7 @@ sisver_sub <- sisver %>%
 ## filter `sisver` such that sector is not in:
 ## c('CRUZ ROJA', 'ESTATAL', 'IMSS-OPORTUNIDADES', 'SEMAR', 'UNIVERSITARIO')
 ########################################################################
-
+filter(!sector %in% c('CRUZ ROJA', 'ESTATAL', 'IMSS-OPORTUNIDADES', 'SEMAR', 'UNIVERSITARIO'))
 ########################################################################
 # first stacked bar plot
 ## hint: `geom_bar()` is what you want for the stacked bar plot
@@ -205,6 +210,16 @@ sisver_sub <- sisver %>%
 ########################################################################
 # grid of stacked bar plots, separated by sector
 ########################################################################
+g1 <- ggplot(sisver_sub, aes(dt_admit, fill = dog_all))+
+  geom_bar()+
+  scale_y_log10()+
+  scale_fill_manual( values = cbbPalette)
+  
+g1
+
+
+g1+facet_wrap(~sector)
+
 ```
 
 How does the risk of death change by `sector`, compared to the private sector?
